@@ -1,0 +1,38 @@
+<div class="container">
+    <h2>{{ editMode ? 'Edit Employee' : 'Add Employee' }}</h2>
+    <form (ngSubmit)="editMode ? updateEmployee() : addEmployee()">
+      <input type="text" placeholder="Name" [(ngModel)]="newEmployee.name" name="name" required>
+      <input type="email" placeholder="Email" [(ngModel)]="newEmployee.email" name="email" required>
+      <input type="text" placeholder="Contact No" [(ngModel)]="newEmployee.contact_no" name="contact_no">
+      <input type="text" placeholder="City" [(ngModel)]="newEmployee.city" name="city">
+      <input type="text" placeholder="State" [(ngModel)]="newEmployee.state" name="state">
+      <input type="text" placeholder="Pin Code" [(ngModel)]="newEmployee.pin_code" name="pin_code">
+      <textarea placeholder="Address" [(ngModel)]="newEmployee.address" name="address"></textarea>
+      <button type="submit">{{ editMode ? 'Update' : 'Add' }}</button>
+      <button type="button" (click)="resetForm()" *ngIf="editMode">Cancel</button>
+    </form>
+  
+    <hr>
+  
+    <h3>Employee List</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th><th>Email</th><th>Contact</th><th>City</th><th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let emp of employees">
+          <td>{{ emp.name }}</td>
+          <td>{{ emp.email }}</td>
+          <td>{{ emp.contact_no }}</td>
+          <td>{{ emp.city }}</td>
+          <td>
+            <button (click)="editEmployee(emp)">Edit</button>
+            <button (click)="deleteEmployee(emp.id)">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  
